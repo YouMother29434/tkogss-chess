@@ -1,0 +1,3 @@
+TKOGSS CHESSSSS!!!!!!
+Based on Frei-X's ChineseChessOnline
+DOES NOT FOLLOW CHESS RULES LOLOL
