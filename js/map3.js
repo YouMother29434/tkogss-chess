@@ -1916,13 +1916,13 @@ window.onload = function() {
 										//alert('LETS FUCKING GO THE RED TEAM IS FUCKED!!!!!!!');
 										let moveSound = new Audio('./audio/kill.wav');
 										moveSound.play();
-										window.location.href = "/teamrandom.html";
+										window.location.href = "/tkogss-chess/teamrandom.html";
 									} else if (Root.arrDead[Root.arrDead.length - 1].n == 'Zhang' && Root.arrDead[Root.arrDead.length - 1].t == 'b') {
 										nowGameState = 10;
 										//alert('HAH LOSER!');
 										let moveSound = new Audio('./audio/kill.wav');
 										moveSound.play();
-										window.location.href = "/alt.html";
+										window.location.href = "/tkogss-chess/alt.html";
 									}
 								}
 								console.log('RIP:');
