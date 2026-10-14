@@ -1,0 +1,73 @@
+
+
+/* Pop Up Message Box */
+#popup_this{ max-height:500px}
+#popup_this h2 { color:#fff; font-size:21px; line-height:26px;}
+.popup_box{ position: relative;}
+
+
+#popup_this {
+    text-align:center; 
+    margin-top: 0px;
+    margin-left: 0px;
+    width:80%;
+    background:#fff; color:#333;
+	max-width:960px; 
+	border: 3px solid #ff8a43;
+    border-radius: 16px;
+}
+#popup_this .content { 
+	min-height: 450px; max-height: 450px;
+	overflow-y: auto;  
+    border-radius: 16px;
+}
+#popup_this .content img{ max-width:100%; height:auto;}
+
+.b-close {
+right: 0; top: 0;
+cursor: pointer;color: #333;
+	background: #fff;
+  border-radius: 50%; z-index: 1; box-shadow: 0 0 5px #666;
+line-height:23px;
+padding: 5px 12px;width: auto !important;margin: 0 !important;position: absolute !important;
+}
+
+
+.b-close:hover { 
+    background: #FF9E00; color: #fff;
+}
+
+  ul.bpopUpCarousel {
+    overflow: hidden; margin: 0; padding: 0;
+	 
+  }
+
+  ul.bpopUpCarousel li {
+
+    text-align: center;
+  }
+
+  ul.bpopUpCarousel .active {
+    display: block;
+  }
+
+  .button-bpopUpCarousel button {
+    color: #fff;
+    font-size: 14px;
+    padding: 8px 40px;
+    border: none;
+    background-color: #ff8a43;
+    margin: 0 3px;
+    border-radius: 5px;
+  }
+.button-bpopUpCarousel button:hover { background: #CF0B5D;}
+
+  .button-bpopUpCarousel {
+    text-align: center; margin: 20px 0;
+  }
+
+
+@media screen and (max-width: 960px) {
+	#popup_this {  max-height:400px}
+	#popup_this .content{ min-height: auto;  max-height: 400px;	 min-width:100%; margin:0; padding:0}
+}
