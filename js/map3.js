@@ -1,3 +1,5 @@
+//made by 3C21 😂😂😂😂
+
 console.time('耗时');
 /**
  *canvas出现毛边  一个是0.5px问题  一个是扩大canvas的宽高(提高分辨率)  再设置css进行缩放
