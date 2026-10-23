@@ -11,34 +11,30 @@
 		<style>
 			html,
 			body {
-    background-image: url('./img/tkogss.jpg') !important;
-    background-size: cover;          
-    background-position: center;     
-    background-repeat: no-repeat;
-    background-attachment: fixed;    
-}
-			<a href="https://www.gate2home.com" class="my-button">Visit Google</a>
+				background-image: url('./img/tkogss.jpg') !important;
+				background-size: cover;          
+				background-position: center;     
+				background-repeat: no-repeat;
+				background-attachment: fixed;    
+			}
 
-
-<style>
-  .my-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;   
-    font-weight: bold;
-  }
-  .my-button:hover {
-    background-color: #0056b3; 
-  }
-</style>
+			.my-button {
+				display: inline-block;
+				padding: 10px 20px;
+				background-color: #007BFF;
+				color: white;
+				text-decoration: none;
+				border-radius: 5px;   
+				font-weight: bold;
+			}
+			
+			.my-button:hover {
+				background-color: #0056b3; 
+			}
 
 			body {
 				margin: 0;
 				padding: 0;
-				
 				overflow: hidden;
 				-moz-user-select: none;
 				-ms-user-select: none;
@@ -81,25 +77,12 @@
 		<link href="./css/css/font-awesome.css" rel="stylesheet">
 		<script>
 			(function() {
-				//rem 与屏幕/字体大小比例计算
 				var userFontSize = parseFloat(getComputedStyle(document.documentElement, false)['fontSize']);
 				var ratio = 16 / userFontSize;
 				var fontSize = (innerWidth / 1536 * 0.625) * 10 * ratio;
 				document.documentElement.style.fontSize = fontSize + "rem";
-//				if(innerWidth<=768){
-//					var userFontSize = parseFloat(getComputedStyle(document.documentElement, false)['fontSize']);
-//					var ratio = 16 / userFontSize;
-//					var fontSize = (innerWidth / 1536 * 0.625) * 10 * ratio;
-//					document.documentElement.style.fontSize = fontSize + "rem";
-//				}
-				//				window.onresize = function() {
-				//					fontSize = (innerWidth / 1536 * 0.625) * 10 * ratio;
-				//					document.documentElement.style.fontSize = fontSize + "rem";
-				//}
 			})();
 		</script>
-		<!--<script src="http://livejs.com/live.js"></script>-->
-		<!--<script src="js/live.js"></script>-->
 		<script src="js/socket.io.min.js"></script>
 		<script src="js/axios0.18.min.js"></script>
 	</head>
@@ -107,6 +90,8 @@
 	<body>
 
 		<div id="box">
+			<a href="https://www.gate2home.com" class="my-button">Visit Google</a>
+
 			<canvas id="map"></canvas>
 			<audio src="audio/music.ogg" id="audioBGM" loop="loop" hidden="hidden"></audio>
 			<audio src="audio/MOVE.WAV" hidden="hidden" id="audioClick"></audio>
@@ -147,7 +132,6 @@
 			<div id="chat_body" class="chat_center">
 				<div id="chat_main">
 					<div id="chat_main_info">
-						<!--别人的-->
 						<div class="other_info">
 						
 						</div>
@@ -167,7 +151,6 @@
 				<input type="text" id="" value="" placeholder="输入您的昵称" maxlength="6" />
 				<div id="selfName"></div>
 				<div id="smile" class="fa fa-paper-plane-o"></div>
-				<!--头像列表-->
 				<div id="smileList">
 					<div>选择您的头像</div>
 					<i class="fa fa-paper-plane-o"></i>
