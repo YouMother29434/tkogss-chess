@@ -507,14 +507,17 @@ polarisImg.src = './img/Polaris.jpg';
 const pumpImg = new Image();
 pumpImg.src = './img/test.png';
 
-function funPutChess() {
+const pumpMoveImg = new Image();
+pumpMoveImg.src = './img/test-move.png';
+
+function funPutChess(draw) {
 	if (innerWidth <= 700 && innerHeight > innerWidth) {
 		p.font = `bold ${(w / 2.5) * 1.5}px Segoe UI`;
 	} else {
 		p.font = `bold ${(w / 2.5) * 1.3}px Seoge UI`;
 	}
 
-	function drawChess() {
+	function drawChess(chess) {
 		for (let i = 0; i < Root.arrMap.length; i++) {
 			if (Object.keys(Root.arrMap[i]).length !== 0) {
 				var curChess = Root.arrMap[i];
@@ -539,12 +542,15 @@ function funPutChess() {
 						};
 					}
 				} else if (curChess.n === 'Pump') {
-					if (pumpImg.complete) {
+					const image = draw === curChess && pumpMoveImg.complete && pumpMoveImg.naturalWidth > 0
+						? pumpMoveImg
+						: pumpImg;
+					if (image.complete && image.naturalWidth > 0) {
 						const aspectRatio = 875 / 1015;
 						const drawH = (chessRadius * 2)*2;
 						const drawW = drawH * aspectRatio;
 
-						p.drawImage(pumpImg, chessX - (drawW / 2), chessY - chessRadius, drawW, drawH);
+						p.drawImage(image, chessX - (drawW / 2), chessY - chessRadius, drawW, drawH);
 						continue;
 					} else {
 						pumpImg.onload = function() {
@@ -615,11 +621,11 @@ function funPutChess() {
 //把所有绘制函数存入数组
 Root.arrReDraw.push(funDrawMap, funPutChess);
 //清除画布 重绘(重调所有绘图函数)
-Root.funReDraw = function() {
+Root.funReDraw = function(draw) {
 	console.time('movin and redrawin');
 	p.clearRect(-mapSize.width * (0.12 / 2), -mapSize.height * (0.12 / 2), map.width, map.height);
 	for (let i = 0; i < Root.arrReDraw.length; i++) {
-		Root.arrReDraw[i]();
+		Root.arrReDraw[i](draw);
 	}
 	console.timeEnd('movin and redrawin');
 };
@@ -1656,7 +1662,7 @@ window.onload = function() {
 	//funDrawMap();
 	//放置棋子
 	//funPutChess();
-	Root.funReDraw();
+	Root.funReDraw("nopump");
 
 	//当前 选中的棋子
 	let nowSelectedChess = null;
@@ -1912,16 +1918,28 @@ window.onload = function() {
 
 										nowSelectedChess = null;
 									} else {
-										//console.log(nowSelectedChess);
-										nowSelectedChess.xy = [
-											nSCX + diffX * (nowCount / count),
-											nSCY + diffY * (nowCount / count)
-										];
-										//	alert((diffY/count)*(nowCount/count))
-										Root.arrMap[target.index] = nowSelectedChess;
-										Root.funReDraw();
-										requestAnimationFrame(moveAnimation);
-										nowCount++;
+										if (nowCount == count) {
+											nowSelectedChess.xy = [
+												nSCX + diffX * (nowCount / count),
+												nSCY + diffY * (nowCount / count)
+											];
+											//	alert((diffY/count)*(nowCount/count))
+											Root.arrMap[target.index] = nowSelectedChess;
+											Root.funReDraw(null);
+											requestAnimationFrame(moveAnimation);
+											nowCount++;
+										} else {
+											//console.log(nowSelectedChess);
+											nowSelectedChess.xy = [
+												nSCX + diffX * (nowCount / count),
+												nSCY + diffY * (nowCount / count)
+											];
+											//	alert((diffY/count)*(nowCount/count))
+											Root.arrMap[target.index] = nowSelectedChess;
+											Root.funReDraw(nowSelectedChess);
+											requestAnimationFrame(moveAnimation);
+											nowCount++;
+										}
 									}
 								}
 								if (Object.keys(Root.arrMap[target.index]).length == 0) {
