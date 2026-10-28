@@ -1,5 +1,3 @@
-//made by 3C21 😂😂😂😂
-
 console.time('耗时');
 /**
  *canvas出现毛边  一个是0.5px问题  一个是扩大canvas的宽高(提高分辨率)  再设置css进行缩放
@@ -122,8 +120,8 @@ let Root = {
 		{},
 		{},
 		{
-			n: 'Pump',
-			xy: [7, 2],
+			n: 'Polaris',
+			xy: [6, 2],
 			t: 'b'
 		},
 		{},
@@ -218,7 +216,7 @@ let Root = {
 		},
 		{},
 		{
-			n: '炮',
+			n: 'Pump',
 			xy: [1, 7],
 			t: 'r'
 		},
@@ -228,7 +226,7 @@ let Root = {
 		{},
 		{},
 		{
-			n: '炮',
+			n: 'Pump',
 			xy: [7, 7],
 			t: 'r'
 		},
@@ -506,6 +504,9 @@ function funDrawMap() {
 const polarisImg = new Image();
 polarisImg.src = './img/Polaris.jpg';
 
+const pumpImg = new Image();
+pumpImg.src = './img/test.png';
+
 function funPutChess() {
 	if (innerWidth <= 700 && innerHeight > innerWidth) {
 		p.font = `bold ${(w / 2.5) * 1.5}px Segoe UI`;
@@ -528,7 +529,7 @@ function funPutChess() {
 				if (curChess.n === 'Polaris') {
 					console.log("polaris is here");
 					if (polarisImg.complete) {
-						p.drawImage(polarisImg, chessX - chessRadius, chessY - chessRadius, chessRadius * 2, chessRadius * 2);
+						p.drawImage(polarisImg, chessX - chessRadius, chessY - chessRadius, chessRadius * 4, chessRadius * 4);
 						continue;
 					} else {
 						polarisImg.onload = function() {
@@ -537,8 +538,22 @@ function funPutChess() {
 							}
 						};
 					}
+				} else if (curChess.n === 'Pump') {
+					if (pumpImg.complete) {
+						const aspectRatio = 875 / 1015;
+						const drawH = (chessRadius * 2)*2;
+						const drawW = drawH * aspectRatio;
+
+						p.drawImage(pumpImg, chessX - (drawW / 2), chessY - chessRadius, drawW, drawH);
+						continue;
+					} else {
+						pumpImg.onload = function() {
+							if (typeof funPutChess === 'function') {
+								funPutChess();
+							}
+						};
+					}
 				}
-					//console.log("curChess is: " + curChess.t);
 				p.beginPath();
 				if (curChess.t === 'b') {
 					for (let i = 0; i < 3; i++) {
@@ -601,12 +616,12 @@ function funPutChess() {
 Root.arrReDraw.push(funDrawMap, funPutChess);
 //清除画布 重绘(重调所有绘图函数)
 Root.funReDraw = function() {
-	console.time('移动重绘');
+	console.time('movin and redrawin');
 	p.clearRect(-mapSize.width * (0.12 / 2), -mapSize.height * (0.12 / 2), map.width, map.height);
 	for (let i = 0; i < Root.arrReDraw.length; i++) {
 		Root.arrReDraw[i]();
 	}
-	console.timeEnd('移动重绘');
+	console.timeEnd('movin and redrawin');
 };
 Root.oChessRecor = {
 	title: null,
@@ -925,7 +940,7 @@ function funComprise(practicable, tager, shittype) {
 			funComprise(arrPracticable, oTager);
 			if (arrPoor.length == 0) {
 			} else {
-				console.error('马被以下位置撇脚:');
+				console.error('horse is anchored at:');
 				console.log(arrPoor);
 			}
 
@@ -937,6 +952,7 @@ function funComprise(practicable, tager, shittype) {
 			let arrPorn = [];
 
 			function funPoor(x, y) {
+				let arrPorn = []; 
 				arrPracticable.push([oChess.xy[0],oChess.xy[1]]);
 				//马的朝向,大的那一个
 				//x轴右移进一格或左移一格,y不变
@@ -996,7 +1012,7 @@ function funComprise(practicable, tager, shittype) {
 			funComprise(arrPracticable, oTager);
 			if (arrPorn.length == 0) {
 			} else {
-				console.error('马被以下位置撇脚:');
+				console.error('horse is anchored at:');
 				console.log(arrPorn);
 			}
 
@@ -1041,7 +1057,7 @@ function funComprise(practicable, tager, shittype) {
 				funComprise(arrPracticable, oTager);
 				if (arrPoor.length == 0) {
 				} else {
-					console.error('象被以下位置撇脚:');
+					console.error('elephant is anchored at:');
 					console.log(arrPoor);
 				}
 			})();
@@ -1589,10 +1605,10 @@ function funComprise(practicable, tager, shittype) {
 			console.error("fuck this type, it doesn't even exist");
 			break;
 	}
-	console.log('可行位置:');
+	console.log('can go to:');
 	console.log(arrPracticable);
-	console.log('验证通过?:' + bVerification);
-	console.log('全局信息:');
+	console.log('are you a smart guy?:' + bVerification);
+	console.log('idk:');
 	console.log(Root.arrMap);
 	return {
 		bVerification: bVerification,
@@ -1744,7 +1760,7 @@ window.onload = function() {
 							break;
 						}
 
-						console.log(JSON.stringify(Root.arrMap[i]) + '位置:' + i);
+						console.log(JSON.stringify(Root.arrMap[i]) + 'pleaz:' + i);
 						//找到了  就把它赋给一个变量  且终止循环
 						//多次点击都有棋子  也覆盖  保持只选中一个
 						//棋子为空  就选中,如果已选中 就判断已选中的的棋子与即将选中的棋子阵营是否属于己方
@@ -1918,13 +1934,13 @@ window.onload = function() {
 										//alert('LETS FUCKING GO THE RED TEAM IS FUCKED!!!!!!!');
 										let moveSound = new Audio('./audio/kill.wav');
 										moveSound.play();
-										window.location.href = "/tkogss-chess/teamrandom.html";
+										window.location.href = "/teamrandom.html";
 									} else if (Root.arrDead[Root.arrDead.length - 1].n == 'Zhang' && Root.arrDead[Root.arrDead.length - 1].t == 'b') {
 										nowGameState = 10;
 										//alert('HAH LOSER!');
 										let moveSound = new Audio('./audio/kill.wav');
 										moveSound.play();
-										window.location.href = "/tkogss-chess/alt.html";
+										window.location.href = "/alt.html";
 									}
 								}
 								console.log('RIP:');
